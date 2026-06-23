@@ -1,25 +1,44 @@
 const app = document.getElementById("app");
 
 let story = {
-date: "",
-mood: "",
-choice: "",
-extras: [],
-note: ""
+date:"",
+mood:"",
+extras:[],
+note:""
 };
 
 createParticles();
+startFloatingMemories();
 showWelcome();
+
+/* --------------------- */
+/* RENDER */
+/* --------------------- */
 
 function render(html){
 app.innerHTML = html;
 }
 
+/* --------------------- */
+/* WELCOME */
+/* --------------------- */
+
 function showWelcome(){
 
 render(`
+
 <div class="scene">
+
 <div class="card">
+
+<div class="envelope"
+onclick="openEnvelope(this)">
+
+<div class="envelope-flap"></div>
+
+<div class="envelope-body"></div>
+
+</div>
 
 <div class="title">
 Ishita & Aayush ❤️
@@ -30,24 +49,45 @@ For the person behind my favorite notifications ❤️
 </div>
 
 <p class="text">
-💌 You have 1 unread memory
+
+You have 1 unread memory ❤️
+
 </p>
 
-<button
-class="primary-btn"
-onclick="showPassword()">
-Open
-</button>
+</div>
 
 </div>
-</div>
+
 `);
+
 }
+
+/* --------------------- */
+/* ENVELOPE */
+/* --------------------- */
+
+function openEnvelope(el){
+
+el.classList.add("open");
+
+setTimeout(()=>{
+
+showPassword();
+
+},900);
+
+}
+
+/* --------------------- */
+/* PASSWORD */
+/* --------------------- */
 
 function showPassword(){
 
 render(`
+
 <div class="scene">
+
 <div class="card">
 
 <div class="heading">
@@ -55,13 +95,15 @@ Tell me...
 </div>
 
 <p class="text">
+
 When did screenshots become hand-holding? ❤️
+
 </p>
 
 <input
 id="pwd"
-class="password-input"
 type="password"
+class="password-input"
 placeholder="Enter Password">
 
 <p id="error"></p>
@@ -69,12 +111,17 @@ placeholder="Enter Password">
 <button
 class="primary-btn"
 onclick="checkPassword()">
+
 Unlock Our Story ❤️
+
 </button>
 
 </div>
+
 </div>
+
 `);
+
 }
 
 function checkPassword(){
@@ -88,15 +135,23 @@ document.getElementById("error").innerHTML =
 "That's not our special day 🙈";
 
 return;
+
 }
 
 showLetter();
+
 }
+
+/* --------------------- */
+/* LETTER */
+/* --------------------- */
 
 function showLetter(){
 
 render(`
+
 <div class="scene">
+
 <div class="card">
 
 <div class="heading">
@@ -104,13 +159,13 @@ Dear Ishita ❤️
 </div>
 
 <p
-class="text"
-id="letterText">
+id="letter"
+class="text">
 </p>
 
 <button
-style="display:none"
 id="continueBtn"
+style="display:none"
 class="primary-btn"
 onclick="showCounter()">
 
@@ -119,53 +174,66 @@ Continue ✨
 </button>
 
 </div>
+
 </div>
+
 `);
 
-const text =
+const fullText =
+
 `Before we choose another adventure...
 
-I just wanted to remind you that meeting you on 26 September 2025 remains one of my favorite moments. ❤️`;
+I just wanted to remind you that meeting you on 26 September 2025 remains one of my favorite moments.
+
+❤️`;
+
+const words =
+fullText.split(" ");
 
 let i = 0;
 
 const target =
-document.getElementById("letterText");
+document.getElementById("letter");
 
 const interval =
 setInterval(()=>{
 
-target.innerHTML += text.charAt(i);
+target.innerHTML +=
+words[i] + " ";
 
 i++;
 
-if(i >= text.length){
+if(i >= words.length){
 
 clearInterval(interval);
 
 document
 .getElementById("continueBtn")
-.style.display = "inline-block";
+.style.display="inline-block";
 
 }
 
-},30);
+},120);
+
 }
+
+/* --------------------- */
+/* COUNTER */
+/* --------------------- */
 
 function showCounter(){
 
 render(`
+
 <div class="scene">
+
 <div class="card">
 
 <div class="heading">
 Together Since ❤️
 </div>
 
-<div
-id="counter"
-class="counter">
-</div>
+<div id="counter"></div>
 
 <p class="text">
 And counting...
@@ -180,21 +248,22 @@ Choose Our Next Adventure ❤️
 </button>
 
 </div>
+
 </div>
+
 `);
 
 updateCounter();
 
-setInterval(
-updateCounter,
-1000
-);
+window.counterInterval =
+setInterval(updateCounter,1000);
+
 }
 
 function updateCounter(){
 
 const start =
-new Date("2025-09-26");
+new Date("2025-09-26T00:00:00");
 
 const now =
 new Date();
@@ -203,25 +272,68 @@ const diff =
 now - start;
 
 const days =
+Math.floor(diff/(1000*60*60*24));
+
+const hours =
 Math.floor(
-diff/86400000
+(diff/(1000*60*60))%24
+);
+
+const mins =
+Math.floor(
+(diff/(1000*60))%60
+);
+
+const secs =
+Math.floor(
+(diff/1000)%60
 );
 
 const counter =
 document.getElementById("counter");
 
-if(counter){
+if(!counter) return;
 
-counter.innerHTML =
-`${days}<br>Days`;
+counter.innerHTML = `
+
+<div class="counter-grid">
+
+<div class="counter-card">
+<div class="counter-number">${days}</div>
+<div class="counter-label">Days ❤️</div>
+</div>
+
+<div class="counter-card">
+<div class="counter-number">${hours}</div>
+<div class="counter-label">Hours</div>
+</div>
+
+<div class="counter-card">
+<div class="counter-number">${mins}</div>
+<div class="counter-label">Minutes</div>
+</div>
+
+<div class="counter-card">
+<div class="counter-number">${secs}</div>
+<div class="counter-label">Seconds</div>
+</div>
+
+</div>
+
+`;
 
 }
-}
+
+/* --------------------- */
+/* DATE */
+/* --------------------- */
 
 function showDate(){
 
 render(`
+
 <div class="scene">
+
 <div class="card">
 
 <div class="heading">
@@ -229,8 +341,10 @@ One Question ❤️
 </div>
 
 <p class="text">
+
 If you could steal one day from the future,
 which day would you spend with me?
+
 </p>
 
 <input
@@ -247,58 +361,68 @@ Continue ❤️
 </button>
 
 </div>
+
 </div>
+
 `);
+
 }
 
 function saveDate(){
 
-const date =
+const d =
 document.getElementById("date").value;
 
-if(!date){
+if(!d){
 
 alert("Choose a date ❤️");
 
 return;
+
 }
 
-story.date = date;
+story.date = d;
 
 showMood();
+
 }
+
+/* --------------------- */
+/* MOOD */
+/* --------------------- */
 
 function showMood(){
 
 render(`
+
 <div class="scene">
+
 <div class="card">
 
 <div class="heading">
-Choose The Mood ❤️
+
+How should this memory feel? ❤️
+
 </div>
 
 <div class="option-grid">
 
-<div
-class="option"
-onclick="chooseMood('Cozy Café')">
+<div class="option"
+onclick="selectMood('Cozy & Slow')">
 
-☕ Cozy Café
-
-</div>
-
-<div
-class="option"
-onclick="chooseMood('Romantic Restaurant')">
-
-🍽️ Romantic Restaurant
+☕ Cozy & Slow
 
 </div>
 
-<div
-class="option"
-onclick="chooseMood('Surprise Me')">
+<div class="option"
+onclick="selectMood('Elegant & Fancy')">
+
+🍽️ Elegant & Fancy
+
+</div>
+
+<div class="option"
+onclick="selectMood('Surprise Me')">
 
 🌅 Surprise Me
 
@@ -307,38 +431,75 @@ onclick="chooseMood('Surprise Me')">
 </div>
 
 </div>
+
 </div>
+
 `);
+
 }
 
-function chooseMood(mood){
+function selectMood(mood){
 
 story.mood = mood;
 
 showExtras();
+
 }
+
+/* --------------------- */
+/* EXTRAS */
+/* --------------------- */
 
 function showExtras(){
 
 render(`
+
 <div class="scene">
+
 <div class="card">
 
 <div class="heading">
-Little Things ❤️
+
+What would make the day perfect? ❤️
+
 </div>
 
 <div class="option-grid">
 
-<div class="option" onclick="toggleExtra(this,'Long Drive')">🚗 Long Drive</div>
+<div class="option"
+onclick="toggleExtra(this,'Long Drive')">
 
-<div class="option" onclick="toggleExtra(this,'Deep Talks')">💬 Deep Talks</div>
+🚗 Long Drive
 
-<div class="option" onclick="toggleExtra(this,'Sunset')">🌅 Sunset</div>
+</div>
 
-<div class="option" onclick="toggleExtra(this,'Music')">🎶 Music</div>
+<div class="option"
+onclick="toggleExtra(this,'Deep Talks')">
 
-<div class="option" onclick="toggleExtra(this,'Stargazing')">✨ Stargazing</div>
+💬 Deep Talks
+
+</div>
+
+<div class="option"
+onclick="toggleExtra(this,'Music')">
+
+🎶 Music
+
+</div>
+
+<div class="option"
+onclick="toggleExtra(this,'Sunset')">
+
+🌅 Sunset
+
+</div>
+
+<div class="option"
+onclick="toggleExtra(this,'Stargazing')">
+
+✨ Stargazing
+
+</div>
 
 </div>
 
@@ -351,8 +512,11 @@ Continue ❤️
 </button>
 
 </div>
+
 </div>
+
 `);
+
 }
 
 function toggleExtra(el,value){
@@ -371,23 +535,30 @@ x=>x!==value
 story.extras.push(value);
 
 }
+
 }
+
+/* --------------------- */
+/* NOTE */
+/* --------------------- */
 
 function showNote(){
 
 render(`
+
 <div class="scene">
+
 <div class="card">
 
 <div class="heading">
-Secret Note ❤️
+
+Anything your heart isn't saying out loud? ❤️
+
 </div>
 
 <textarea
 id="note"
-class="note-input"
-placeholder="Anything your heart isn't saying out loud?">
-</textarea>
+class="note-input"></textarea>
 
 <button
 class="primary-btn"
@@ -398,8 +569,11 @@ Continue ❤️
 </button>
 
 </div>
+
 </div>
+
 `);
+
 }
 
 function saveNote(){
@@ -408,12 +582,19 @@ story.note =
 document.getElementById("note").value;
 
 showFinal();
+
 }
+
+/* --------------------- */
+/* FINAL */
+/* --------------------- */
 
 function showFinal(){
 
 render(`
+
 <div class="scene">
+
 <div class="card">
 
 <div class="success-heart">
@@ -432,71 +613,29 @@ Now it's my turn to make it unforgettable ❤️
 
 <div class="small-note">
 
-P.S. I'd still choose you in every timeline ❤️
+P.S.
+I'd still choose you in every timeline ❤️
 
 </div>
 
-<button
-class="primary-btn"
-onclick="downloadMemory()">
-
-Save Memory ❤️
-
-</button>
+</div>
 
 </div>
-</div>
+
 `);
+
 }
 
-function downloadMemory(){
-
-const content =
-
-`Ishita & Aayush ❤️
-
-Date:
-${story.date}
-
-Mood:
-${story.mood}
-
-Extras:
-${story.extras.join(", ")}
-
-Secret Note:
-${story.note}
-
-Now it's my turn to make it unforgettable ❤️`;
-
-const blob =
-new Blob(
-[content],
-{type:"text/plain"}
-);
-
-const url =
-URL.createObjectURL(blob);
-
-const a =
-document.createElement("a");
-
-a.href = url;
-
-a.download =
-"our-memory.txt";
-
-a.click();
-
-URL.revokeObjectURL(url);
-}
+/* --------------------- */
+/* PARTICLES */
+/* --------------------- */
 
 function createParticles(){
 
-const container =
+const holder =
 document.getElementById("particles");
 
-for(let i=0;i<25;i++){
+for(let i=0;i<40;i++){
 
 const p =
 document.createElement("div");
@@ -508,11 +647,62 @@ p.style.left =
 Math.random()*100+"%";
 
 p.style.animationDuration =
-(8 + Math.random()*10)+"s";
+(10+Math.random()*12)+"s";
 
 p.style.animationDelay =
 Math.random()*5+"s";
 
-container.appendChild(p);
+holder.appendChild(p);
+
 }
+
+}
+
+/* --------------------- */
+/* FLOATING MEMORIES */
+/* --------------------- */
+
+function startFloatingMemories(){
+
+const memories = [
+
+"26 Sept 2025 ❤️",
+"Our First Meeting ❤️",
+"One Unread Memory ❤️",
+"Forever Starts Small ❤️",
+"Ishita & Aayush ❤️"
+
+];
+
+setInterval(()=>{
+
+const m =
+document.createElement("div");
+
+m.className =
+"memory";
+
+m.innerHTML =
+memories[
+Math.floor(
+Math.random()*memories.length
+)
+];
+
+m.style.left =
+Math.random()*80+"%";
+
+m.style.top =
+Math.random()*80+"%";
+
+document.body.appendChild(m);
+
+setTimeout(()=>{
+
+m.remove();
+
+},8000);
+
+},5000);
+
 }
