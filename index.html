@@ -1,309 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ishita & Aayush ❤️</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="style.css">
+<title>
+Ishita & Aayush ❤️
+</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="style.css">
+
 </head>
 
 <body>
 
-<div class="hearts"></div>
+<!-- PARTICLES -->
 
-<!-- SCREEN 1 -->
-<section id="welcomeScreen" class="screen active">
+<div id="particles"></div>
 
-<div class="glass-card">
+<!-- MUSIC BUTTON -->
 
-<h1>Ishita & Aayush ❤️</h1>
-
-<h3>
-For the person behind my favorite notifications ❤️
-</h3>
-
-<p>
-Some conversations become habits.<br>
-Some habits become feelings.<br>
-Some feelings become forever.
-</p>
-
-<button onclick="goToPassword()">
-Enter Our Story ✨
+<button id="musicBtn"
+class="music-btn">
+🎵
 </button>
+
+<!-- APP -->
+
+<div id="app">
+
+<!-- SCENE CONTENT INJECTED HERE -->
 
 </div>
-
-</section>
-
-<!-- SCREEN 2 -->
-
-<section id="passwordScreen" class="screen">
-
-<div class="glass-card">
-
-<h2>
-Tell me...
-</h2>
-
-<p>
-When did screenshots become hand-holding? ❤️
-</p>
-
-<input
-type="password"
-id="passwordInput"
-placeholder="Enter Password">
-
-<button onclick="checkPassword()">
-Unlock Our Story ❤️
-</button>
-
-<p id="passwordError"></p>
-
-</div>
-
-</section>
-
-<!-- SCREEN 3 -->
-
-<section id="dearScreen" class="screen">
-
-<div class="glass-card">
-
-<h2>Dear Ishita ❤️</h2>
-
-<p>
-Before you choose a date,
-a café,
-a long drive,
-or a sunset...
-</p>
-
-<p>
-I just wanted to remind you that
-meeting you on
-<strong>26 September 2025</strong>
-remains one of my favorite moments.
-</p>
-
-<button onclick="goToCounter()">
-Continue ✨
-</button>
-
-</div>
-
-</section>
-
-<!-- SCREEN 4 -->
-
-<section id="counterScreen" class="screen">
-
-<div class="glass-card">
-
-<h2>
-Together Since ❤️
-</h2>
-
-<div id="loveCounter"></div>
-
-<p>
-Every second since then has been my favorite.
-</p>
-
-<button onclick="goToDate()">
-Choose Our Next Adventure ❤️
-</button>
-
-</div>
-
-</section>
-
-<!-- SCREEN 5 -->
-
-<section id="dateScreen" class="screen">
-
-<div class="glass-card">
-
-<h2>
-📅 Choose Our Next Memory
-</h2>
-
-<p>
-Which day should become our next favorite memory?
-</p>
-
-<input type="date" id="dateChoice">
-
-<button onclick="goToVenue()">
-Continue ❤️
-</button>
-
-</div>
-
-</section>
-
-<!-- SCREEN 6 -->
-
-<section id="venueScreen" class="screen">
-
-<div class="glass-card">
-
-<h2>
-What's today's love language?
-</h2>
-
-<div class="option-grid">
-
-<button onclick="selectVenue('Cafe')">
-☕ Cozy Café
-</button>
-
-<button onclick="selectVenue('Restaurant')">
-🍽️ Romantic Restaurant
-</button>
-
-<button onclick="selectVenue('Surprise')">
-🌅 Surprise Me
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- SCREEN 7 -->
-
-<section id="typeScreen" class="screen">
-
-<div class="glass-card">
-
-<h2 id="typeHeading"></h2>
-
-<div
-id="typeOptions"
-class="option-grid">
-</div>
-
-</div>
-
-</section>
-
-<!-- SCREEN 8 -->
-
-<section id="extrasScreen" class="screen">
-
-<div class="glass-card">
-
-<h2>
-Choose Everything Your Heart Wants ❤️
-</h2>
-
-<label><input type="checkbox" value="Long Drive"> 🚗 Long Drive</label>
-<label><input type="checkbox" value="Deep Talks"> 💬 Deep Talks</label>
-<label><input type="checkbox" value="Sunset"> 🌅 Sunset Watching</label>
-<label><input type="checkbox" value="Music"> 🎶 Music Together</label>
-<label><input type="checkbox" value="Pictures"> 📸 Cute Pictures</label>
-<label><input type="checkbox" value="Rain Walk"> 🌧️ Rain Walk</label>
-<label><input type="checkbox" value="Stargazing"> ✨ Stargazing</label>
-
-<button onclick="goToNote()">
-Continue ❤️
-</button>
-
-</div>
-
-</section>
-
-<!-- SCREEN 9 -->
-
-<section id="noteScreen" class="screen">
-
-<div class="glass-card">
-
-<h2>
-Anything you'd secretly love on this date? ❤️
-</h2>
-
-<textarea
-id="secretNote"
-rows="6"
-placeholder="Write whatever your heart wants...">
-</textarea>
-
-<button onclick="goToLoveQuestion()">
-Continue ❤️
-</button>
-
-</div>
-
-</section>
-
-<!-- SCREEN 10 -->
-
-<section id="loveQuestionScreen" class="screen">
-
-<div class="glass-card">
-
-<h2>
-How much does Aayush love you? ❤️
-</h2>
-
-<button onclick="showFinalScreen()">
-A Lot ❤️
-</button>
-
-<button onclick="showFinalScreen()">
-Very Much ❤️
-</button>
-
-<button onclick="showFinalScreen()">
-Infinity ❤️
-</button>
-
-</div>
-
-</section>
-
-<!-- SCREEN 11 -->
-
-<section id="finalScreen" class="screen">
-
-<div class="glass-card">
-
-<h1>
-Adventure Accepted ❤️
-</h1>
-
-<p>
-Thank you for planning our next memory.
-</p>
-
-<p>
-Every choice you made is now a promise I want to keep.
-</p>
-
-<h2>
-Now it's my turn to make it unforgettable ❤️
-</h2>
-
-<p class="ps">
-P.S. I'd still choose you in every timeline. ❤️
-</p>
-
-<button onclick="downloadPlan()">
-Download Our Plan ❤️
-</button>
-
-</div>
-
-</section>
 
 <script src="script.js"></script>
 
 </body>
+
 </html>
