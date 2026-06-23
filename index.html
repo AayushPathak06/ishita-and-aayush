@@ -1,0 +1,185 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ishita & Aayush ❤️</title><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet"><style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg,#ffdde1,#ee9ca7);
+min-height:100vh;
+overflow-x:hidden;
+color:white;
+}
+
+.screen{
+display:none;
+min-height:100vh;
+padding:30px;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+}
+
+.active{
+display:flex;
+}
+
+h1{
+font-family:'Dancing Script',cursive;
+font-size:4rem;
+margin-bottom:20px;
+}
+
+h2{
+margin-bottom:20px;
+}
+
+.card{
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(10px);
+padding:30px;
+border-radius:20px;
+max-width:700px;
+width:100%;
+}
+
+button{
+padding:15px 30px;
+border:none;
+border-radius:50px;
+cursor:pointer;
+font-size:16px;
+margin-top:20px;
+background:white;
+color:#d63384;
+font-weight:600;
+}
+
+input{
+width:100%;
+padding:15px;
+border:none;
+border-radius:10px;
+margin-top:15px;
+}
+
+.counter{
+font-size:1.5rem;
+margin:20px 0;
+}
+
+.heart{
+position:fixed;
+font-size:20px;
+animation:float 8s linear infinite;
+opacity:.6;
+}
+
+@keyframes float{
+0%{
+transform:translateY(100vh);
+}
+100%{
+transform:translateY(-100px);
+}
+}
+</style></head><body><div id="landing" class="screen active">
+<div class="card">
+<h1>Ishita ❤️ Aayush</h1><p>
+Some conversations become habits.<br>
+Some habits become feelings.<br>
+Some feelings become forever ❤️
+</p><button onclick="showPassword()">
+Enter Our Story ✨
+</button>
+</div>
+</div><div id="passwordScreen" class="screen">
+<div class="card">
+<h2>Tell me when screenshots became hand-holding ❤️</h2><input type="password"
+id="password"
+placeholder="Enter Password">
+
+<button onclick="checkPassword()">
+Unlock Our Story ❤️
+</button><p id="error" style="margin-top:15px;"></p>
+</div>
+</div><div id="home" class="screen">
+<div class="card"><h1>Ishita ❤️ Aayush</h1><p>
+Officially met in person on
+<b>26 September 2025</b> ❤️
+</p><div id="counter" class="counter"></div><p>
+Every second since that day has been my favorite.
+</p><button onclick="alert('Next page coming soon ❤️')">
+Plan Our Next Memory ✨
+</button></div>
+</div><script>
+
+function showPassword(){
+document.getElementById('landing').classList.remove('active');
+document.getElementById('passwordScreen').classList.add('active');
+}
+
+function checkPassword(){
+
+const pass=document.getElementById('password').value;
+
+if(pass==="26092025"){
+document.getElementById('passwordScreen').classList.remove('active');
+document.getElementById('home').classList.add('active');
+}else{
+document.getElementById('error').innerText=
+"That's not our special day 🙈";
+}
+}
+
+function updateCounter(){
+
+const start=
+new Date("2025-09-26T00:00:00");
+
+const now=
+new Date();
+
+const diff=
+now-start;
+
+const days=
+Math.floor(diff/(1000*60*60*24));
+
+const hours=
+Math.floor((diff/(1000*60*60))%24);
+
+const mins=
+Math.floor((diff/(1000*60))%60);
+
+document.getElementById("counter").innerHTML=
+`${days} Days ❤️ ${hours} Hours ❤️ ${mins} Minutes`;
+}
+
+setInterval(updateCounter,1000);
+updateCounter();
+
+for(let i=0;i<25;i++){
+
+let heart=document.createElement("div");
+
+heart.innerHTML="❤️";
+
+heart.classList.add("heart");
+
+heart.style.left=Math.random()*100+"vw";
+
+heart.style.animationDuration=
+(5+Math.random()*5)+"s";
+
+document.body.appendChild(heart);
+}
+</script></body>
+</html>
