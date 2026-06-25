@@ -4,47 +4,516 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<title>Ishita & Aayush ❤️</title>
 
-<title>
-Ishita & Aayush ❤️
-</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link rel="preconnect"
-href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<link rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
-rel="stylesheet">
-
-<link rel="stylesheet"
-href="style.css">
+<link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
+<!-- MUSIC -->
+
+<audio id="bgMusic" loop>
+    <source src="assets/music.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="pageSound">
+    <source src="assets/page.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="clickSound">
+    <source src="assets/click.mp3" type="audio/mpeg">
+</audio>
+
 <!-- PARTICLES -->
 
 <div id="particles"></div>
 
-<!-- MUSIC BUTTON -->
+<!-- FLOATING HEARTS -->
 
-<button id="musicBtn"
-class="music-btn">
-🎵
-</button>
+<div id="hearts"></div>
 
-<!-- APP -->
+<!-- MAIN APP -->
 
 <div id="app">
 
-<!-- SCENE CONTENT INJECTED HERE -->
+<!-- COVER PAGE -->
+
+<section id="coverPage" class="page active">
+
+<div class="book">
+
+<div class="bookGlow"></div>
+
+<div class="bookShadow"></div>
+
+<div class="cover">
+
+<div class="smallHeart">
+❤️
+</div>
+
+<h2 class="coverSubtitle">
+A Little Book Of
+</h2>
+
+<h1 class="coverTitle">
+
+Ishita<br>
+
+<span>&</span>
+
+Aayush
+
+</h1>
+
+<p class="coverQuote">
+
+Every page inside exists because
+
+you became one of my favourite
+
+chapters.
+
+</p>
+
+<button id="openBook">
+
+Open Our Story ❤️
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- PASSWORD -->
+
+<section id="lockPage" class="page">
+
+<div class="lockCard">
+
+<h2>
+
+Our Secret Door ❤️
+
+</h2>
+
+<p>
+
+Enter the day our story became real.
+
+</p>
+
+<div class="pinContainer">
+
+<div class="pin"></div>
+
+<div class="pin"></div>
+
+<div class="pin"></div>
+
+<div class="pin"></div>
+
+<div class="pin"></div>
+
+<div class="pin"></div>
+
+<div class="pin"></div>
+
+<div class="pin"></div>
+
+</div>
+
+<div id="wrongPin"></div>
+
+<div class="keypad">
+
+<button onclick="press(1)">1</button>
+
+<button onclick="press(2)">2</button>
+
+<button onclick="press(3)">3</button>
+
+<button onclick="press(4)">4</button>
+
+<button onclick="press(5)">5</button>
+
+<button onclick="press(6)">6</button>
+
+<button onclick="press(7)">7</button>
+
+<button onclick="press(8)">8</button>
+
+<button onclick="press(9)">9</button>
+
+<button onclick="clearPin()">❤️</button>
+
+<button onclick="press(0)">0</button>
+
+<button onclick="backspace()">⌫</button>
+
+</div>
+
+<div class="hint">
+
+Hint:
+
+26 September 2025 🙈
+
+</div>
+
+</div>
+
+</section>
+
+<!-- LOADING -->
+
+<section id="loadingPage" class="page">
+
+<div class="loadingCard">
+
+<div class="loaderHeart">
+
+❤️
+
+</div>
+
+<h2>
+
+Loading Our Memories...
+
+</h2>
+
+<p id="loadingText">
+
+Finding smiles...
+
+</p>
+
+</div>
+
+</section>
+
+<!-- LETTER -->
+
+<section id="letterPage" class="page">
+
+<div class="paper">
+
+<div class="paperTop">
+
+Dear Ishita ❤️
+
+</div>
+
+<p id="typedLetter"></p>
+
+<button id="continueButton">
+
+Continue →
+
+</button>
+
+</div>
+
+</section>
+
+<!-- TIMELINE -->
+
+<section id="timelinePage" class="page">
+
+<h1>
+
+Our Story
+
+</h1>
+
+<div class="timeline">
+
+<div class="timelineItem">
+
+<div class="dot"></div>
+
+<h3>
+
+Strangers
+
+</h3>
+
+<p>
+
+Just two people who had no idea what destiny had planned.
+
+</p>
+
+</div>
+
+<div class="timelineItem">
+
+<div class="dot"></div>
+
+<h3>
+
+Countless Conversations
+
+</h3>
+
+<p>
+
+Messages became comfort.
+
+Calls became memories.
+
+</p>
+
+</div>
+
+<div class="timelineItem">
+
+<div class="dot heartDot">
+
+❤️
+
+</div>
+
+<h3>
+
+26 September 2025
+
+</h3>
+
+<p>
+
+The day our conversations finally had smiles, eye contact and real memories.
+
+</p>
+
+</div>
+
+<div class="timelineItem">
+
+<div class="dot"></div>
+
+<h3>
+
+Today
+
+</h3>
+
+<p>
+
+Still writing our favourite chapter.
+
+</p>
+
+</div>
+
+</div>
+
+<button class="nextButton">
+
+Continue ❤️
+
+</button>
+
+</section>
+
+<!-- COUNTDOWN -->
+
+<section id="countdownPage" class="page">
+
+<h1>
+
+Together Since ❤️
+
+</h1>
+
+<div id="flipCountdown">
+
+<div class="flipBox">
+
+<div id="days">0</div>
+
+<span>Days</span>
+
+</div>
+
+<div class="flipBox">
+
+<div id="hours">0</div>
+
+<span>Hours</span>
+
+</div>
+
+<div class="flipBox">
+
+<div id="minutes">0</div>
+
+<span>Minutes</span>
+
+</div>
+
+<div class="flipBox">
+
+<div id="seconds">0</div>
+
+<span>Seconds</span>
+
+</div>
+
+</div>
+
+<button class="nextButton">
+
+Plan Our Next Date ❤️
+
+</button>
+
+</section>
+
+<!-- DATE -->
+
+<section id="plannerPage" class="page">
+
+<div class="planner">
+
+<h1>
+
+Our Next Adventure
+
+</h1>
+
+<p>
+
+Choose a day...
+
+Let's make another favourite memory.
+
+</p>
+
+<input type="date" id="datePicker">
+
+<div class="plannerButtons">
+
+<button class="choice">
+
+☕
+
+Coffee
+
+</button>
+
+<button class="choice">
+
+🍝
+
+Dinner
+
+</button>
+
+<button class="choice">
+
+🚗
+
+Long Drive
+
+</button>
+
+<button class="choice">
+
+🌅
+
+Sunset
+
+</button>
+
+<button class="choice">
+
+🎬
+
+Movie
+
+</button>
+
+<button class="choice">
+
+💬
+
+Deep Talks
+
+</button>
+
+</div>
+
+<textarea
+
+id="note"
+
+placeholder="Leave a tiny message for me...❤️">
+
+</textarea>
+
+<button id="finish">
+
+Complete Our Story ❤️
+
+</button>
+
+</div>
+
+</section>
+
+<!-- FINAL -->
+
+<section id="finalPage" class="page">
+
+<div class="ending">
+
+<div class="bigHeart">
+
+❤️
+
+</div>
+
+<h1>
+
+Now it's my turn
+
+to make it unforgettable.
+
+</h1>
+
+<p>
+
+No matter where life takes us,
+
+I hope we never stop creating
+
+little memories together.
+
+</p>
+
+<h2>
+
+Ishita ❤️ Aayush
+
+</h2>
+
+</div>
+
+</section>
 
 </div>
 
